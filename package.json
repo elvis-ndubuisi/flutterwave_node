@@ -2,8 +2,13 @@
 	"name": "@flutterwave/node",
 	"version": "0.0.0",
 	"description": "Robust flutterwave typescript-first sdk library",
-	"types": "module",
-	"main": "index.js",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"files": ["dist"],
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"dev": "tsup --watch",
 		"build": "tsup",
