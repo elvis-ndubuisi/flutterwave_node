@@ -145,19 +145,25 @@ export class ApiClient {
 		}
 	}
 
-	public get<T>(endpoint: string, params?: Record<string, any>): Promise<T> {
+	public get<T>(
+		endpoint: string,
+		params?: Record<string, unknown>,
+	): Promise<T> {
 		return this.request<T>("GET", endpoint, params);
 	}
 
-	public post<T>(endpoint: string, data: Record<string, any>): Promise<T> {
+	public post<T>(endpoint: string, data: Record<string, unknown>): Promise<T> {
 		return this.request<T>("POST", endpoint, data);
 	}
 
-	public put<T>(endpoint: string, data: Record<string, any>): Promise<T> {
+	public put<T>(endpoint: string, data: Record<string, unknown>): Promise<T> {
 		return this.request<T>("PUT", endpoint, data);
 	}
 
-	public delete<T>(endpoint: string, data?: Record<string, any>): Promise<T> {
+	public delete<T>(
+		endpoint: string,
+		data?: Record<string, unknown>,
+	): Promise<T> {
 		return this.request<T>("DELETE", endpoint, data);
 	}
 }

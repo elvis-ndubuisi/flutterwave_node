@@ -6,6 +6,7 @@ vi.mocked("../../src/core/client.ts");
 
 describe("Bank service", () => {
 	let banksService: BanksService;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	let mockApiClient: any;
 
 	beforeEach(() => {

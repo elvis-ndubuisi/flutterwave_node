@@ -20,7 +20,9 @@ class MockAbortController {
 	};
 	abort = mockAbort;
 }
-global.AbortController = MockAbortController as any;
+
+global.AbortController =
+	MockAbortController as unknown as typeof AbortController;
 
 describe("Api Client", () => {
 	const mockConfig: FlutterwaveConfig = {
@@ -33,6 +35,7 @@ describe("Api Client", () => {
 		vi.clearAllMocks(); // Clears mock call history and implementations
 		apiClient = new ApiClient(mockConfig);
 		// Reset AbortController mock parts if necessary for specific tests
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		(global.AbortController as any).prototype.signal = {
 			aborted: false,
 			reason: undefined,
@@ -41,6 +44,7 @@ describe("Api Client", () => {
 			dispatchEvent: vi.fn(),
 			onabort: null,
 		};
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		(global.AbortController as any).prototype.abort = mockAbort;
 	});
 
@@ -59,18 +63,23 @@ describe("Api Client", () => {
 			const clientWithDefaultTimeout = new ApiClient({
 				secretKey: "test_secret",
 			});
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			expect((clientWithDefaultTimeout as any).timeout).toBe(60000);
 		});
 
 		it("should create an instance with a valid config", () => {
 			const client = new ApiClient({ secretKey: "test_key", timeout: 3000 });
 			expect(client).toBeInstanceOf(ApiClient);
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			expect((client as any).timeout).toBe(3000);
 		});
 
 		it("should initialize with provided config", () => {
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			expect((apiClient as any).secretKey).toBe(mockConfig.secretKey);
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			expect((apiClient as any).baseUrl).toBe(FLUTTERWAVE_BASE_URL);
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			expect((apiClient as any).timeout).toBe(mockConfig.timeout);
 		});
 	});
