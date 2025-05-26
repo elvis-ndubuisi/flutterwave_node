@@ -15,9 +15,9 @@ export class PaymentService {
 	 * Generate Flutterwave checkout to receive payments from customers (Standard payment)
 	 * @param payload Payment details
 	 */
-	async initiate(payload: PaymentInitPayload) {
-		return this.apiClient.post<PaymentInitResponse>("payments", payload);
-	}
+	// async initiate(payload: PaymentInitPayload) {
+	// 	return this.apiClient.post<PaymentInitResponse>("payments", payload);
+	// }
 
-	async verify() {}
+	// async verify() {}
 }
