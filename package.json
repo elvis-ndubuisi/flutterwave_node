@@ -22,7 +22,7 @@
 	"author": "Elvis Ndubuisi",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/elvis-ndubuisi/flutterwave_node.git"
+		"url": "https://github.com/elvis-ndubuisi/flutterwave_node.git"
 	},
 	"license": "MIT",
 	"devDependencies": {
