@@ -1,7 +1,7 @@
 {
-	"name": "flutterwave-node",
+	"name": "flutterwave-universal",
 	"version": "1.2.0",
-	"description": "Robust flutterwave typescript-first sdk library",
+	"description": "Universal TypeScript SDK for Flutterwave payment services, compatible with Node.js, Bun, Deno, Cloudflare Workers and Edge Functions",
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"types": "dist/index.d.ts",
@@ -23,7 +23,11 @@
 	"keywords": [
 		"flutterwave",
 		"payment",
-		"sdk"
+		"sdk",
+		"typescript",
+		"universal",
+		"edge-runtime",
+		"cloudflare-workers"
 	],
 	"author": "Elvis Ndubuisi",
 	"repository": {
