@@ -5,9 +5,7 @@
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"types": "dist/index.d.ts",
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"publishConfig": {
 		"access": "public"
 	},
@@ -20,11 +18,7 @@
 		"test:integration": "vitest --run tests/integration/**/*.test.ts",
 		"release": "semantic-release"
 	},
-	"keywords": [
-		"flutterwave",
-		"payment",
-		"sdk"
-	],
+	"keywords": ["flutterwave", "payment", "sdk"],
 	"author": "Elvis Ndubuisi",
 	"repository": {
 		"type": "git",

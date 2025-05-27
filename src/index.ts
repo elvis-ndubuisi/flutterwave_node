@@ -2,12 +2,14 @@ import { ApiClient } from "./core/client";
 import type { FlutterwaveConfig } from "./core/config";
 import { BanksService } from "./services/banks";
 import { PaymentService } from "./services/payments";
+import { OTPServices } from "./services/otp";
 
 export default class Flutterwave {
 	private apiClient: ApiClient;
 
 	public banks: BanksService;
 	public payments: PaymentService;
+	public otp: OTPServices;
 
 	constructor(config: FlutterwaveConfig) {
 		if (!config || !config.secretKey) {
@@ -19,6 +21,7 @@ export default class Flutterwave {
 		// Initialize services
 		this.banks = new BanksService(this.apiClient);
 		this.payments = new PaymentService(this.apiClient);
+		this.otp = new OTPServices(this.apiClient);
 	}
 
 	async ping(): Promise<{ status: string; message: string }> {
