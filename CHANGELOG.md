@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/elvis-ndubuisi/flutterwave_node/compare/v1.1.0...v1.2.0) (2025-05-27)
+
+
+### Bug Fixes
+
+* export required type definitions ([e611cf4](https://github.com/elvis-ndubuisi/flutterwave_node/commit/e611cf4ef82eb32e4b7a16fd128f02dc874f6765))
+
+
+### Features
+
+* standard payment api ([0ab6f63](https://github.com/elvis-ndubuisi/flutterwave_node/commit/0ab6f6399b63c186340211b88c5a5040523717df))
+
 # [1.1.0](https://github.com/elvis-ndubuisi/flutterwave_node/compare/v1.0.0...v1.1.0) (2025-05-27)
 
 
