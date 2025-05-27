@@ -1,10 +1,10 @@
 import { ApiClient } from "./core/client";
 import type { FlutterwaveConfig } from "./core/config";
 import { BanksService } from "./services/banks";
-import { PaymentService } from "./services/payments";
 import { OTPServices } from "./services/otp";
+import { PaymentService } from "./services/payments";
 
-export default class Flutterwave {
+export class Flutterwave {
 	private apiClient: ApiClient;
 
 	public banks: BanksService;
@@ -41,3 +41,13 @@ export default class Flutterwave {
 		}
 	}
 }
+
+// Export definitions
+export type { FlutterwaveConfig };
+export * from "./definitions/banks";
+export * from "./definitions/common";
+export * from "./definitions/payments";
+export * from "./definitions/opt";
+export * from "./errors/flutterwave-error";
+// Exorts flutter as default or named (for CJS/ESM compatibility if needed)
+export default Flutterwave;
