@@ -7,7 +7,7 @@ export interface GenerateOtpPayload {
 	};
 	sender: string; // The Sender name displayed on the OTP message
 	send: boolean; // Set to true to send OTP to customer
-	medium?: "sms" | "email" | "whatsapp"[];
+	medium?: ("sms" | "email" | "whatsapp")[];
 	expiry?: number; // The expiry time, in minutes, of the OTP. Default value is 1 minute.
 }
 

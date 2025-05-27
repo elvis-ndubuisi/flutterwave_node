@@ -12,7 +12,7 @@ export class OTPServices {
 	 * Create OTP strings of varying lengths.
 	 */
 	async generate(payload: GenerateOtpPayload): Promise<GenerateOtpResult> {
-		return this.client.post("otps", payload);
+		return this.client.post("otps", payload as unknown as Record<string, unknown>);
 	}
 
 	/**
