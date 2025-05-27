@@ -1,5 +1,5 @@
 {
-	"name": "@flutterwave/node",
+	"name": "flutterwave-node",
 	"version": "1.2.0",
 	"description": "Robust flutterwave typescript-first sdk library",
 	"main": "dist/index.js",
