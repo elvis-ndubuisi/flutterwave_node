@@ -3,10 +3,14 @@ export interface FlutterwaveResponse<T> {
 	message: string;
 	data: T;
 	meta?: {
-		page_info: {
+		page_info?: {
 			total: number;
 			current_page: number;
 			total_pages: number;
+		};
+		authorization?: {
+			mode: string;
+			endpoint: string;
 		};
 	};
 }
@@ -24,3 +28,27 @@ export interface PaginationOptions {
 	from?: string; // Date string e.g., 'YYYY-MM-DD'
 	to?: string; // Date string e.g., 'YYYY-MM-DD'
 }
+
+export type Currency =
+	| "NGN"
+	| "GBP"
+	| "CAD"
+	| "XAF"
+	| "CLP"
+	| "COP"
+	| "EGP"
+	| "EUR"
+	| "GHS"
+	| "GNF"
+	| "KES"
+	| "MWK"
+	| "MAD"
+	| "RWF"
+	| "SLL"
+	| "STD"
+	| "ZAR"
+	| "TZS"
+	| "UGX"
+	| "USD"
+	| "XOF"
+	| "ZMW";

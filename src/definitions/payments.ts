@@ -1,7 +1,9 @@
+import type { Currency } from "./common";
+
 export interface PaymentInitPayload {
 	tx_ref: string; // Unique transaction reference
 	amount: string | number;
-	currency: string; // e.g., "NGN", "USD"
+	currency: Currency; // e.g., "NGN", "USD"
 	redirect_url: string;
 	payment_options?: string; // e.g., "card,ussd,banktransfer"
 	customer: {
