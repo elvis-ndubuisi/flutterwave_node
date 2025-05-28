@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/elvis-ndubuisi/flutterwave_node/compare/v1.2.0...v1.3.0) (2025-05-28)
+
+
+### Features
+
+* card charge service ([c36f940](https://github.com/elvis-ndubuisi/flutterwave_node/commit/c36f940960fcd0410456d63416edb5340dfd34cb))
+* charges services ([a554131](https://github.com/elvis-ndubuisi/flutterwave_node/commit/a55413154eef4eb7637d2db040b09f2bfae4e71c))
+
 # [1.2.0](https://github.com/elvis-ndubuisi/flutterwave_node/compare/v1.1.0...v1.2.0) (2025-05-27)
 
 
