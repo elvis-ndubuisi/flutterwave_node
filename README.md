@@ -170,6 +170,51 @@ This SDK is designed to work across multiple JavaScript runtimes:
 | Vercel Edge Functions | ✅ Full | Compatible with Edge Runtime |
 | Netlify Edge Functions | ✅ Full | Works with Netlify Edge |
 
+### Testing Across Different Runtimes
+
+You can verify compatibility across different JavaScript runtimes without installing them locally using Docker:
+
+```bash
+# Make the script executable
+chmod +x test_all_runtimes.sh
+
+# Run tests across all supported runtimes
+./test_all_runtimes.sh
+```
+
+This will build and run Docker containers for each supported runtime:
+- Node.js
+- Bun
+- Deno
+- Cloudflare Workers (simulated environment)
+
+#### Requirements
+
+- Docker installed on your machine
+- Internet connection (to pull Docker images)
+
+#### Testing Individual Runtimes
+
+You can also test individual runtimes:
+
+```bash
+# Test in Node.js
+docker build -t flutterwave-node-test -f ./dockerfiles/Dockerfile.node .
+docker run --rm flutterwave-node-test
+
+# Test in Bun
+docker build -t flutterwave-bun-test -f ./dockerfiles/Dockerfile.bun .
+docker run --rm flutterwave-bun-test
+
+# Test in Deno
+docker build -t flutterwave-deno-test -f ./dockerfiles/Dockerfile.deno .
+docker run --rm flutterwave-deno-test
+
+# Test in Cloudflare Workers (simulated)
+docker build -t flutterwave-cloudflare-test -f ./dockerfiles/Dockerfile.cloudflare .
+docker run --rm flutterwave-cloudflare-test
+```
+
 ## Error Handling
 
 The SDK uses a standardized error system for consistent error handling:
