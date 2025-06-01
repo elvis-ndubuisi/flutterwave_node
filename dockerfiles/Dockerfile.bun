@@ -1,0 +1,32 @@
+FROM oven/bun:latest
+
+# Set environment variables for better network handling
+ENV NODE_ENV=development
+
+WORKDIR /app
+
+# Copy source code first, excluding node_modules (via .dockerignore)
+COPY . .
+
+# Install dependencies
+RUN echo "Installing dependencies with Bun..." && \
+    bun install --no-save || \
+    (echo "Bun install failed, retrying with timeout..." && \
+     bun install --no-save --no-cache) || \
+    (echo "Bun install failed again, falling back to npm..." && \
+     apt-get update && \
+     apt-get install -y curl && \
+     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+     apt-get install -y nodejs && \
+     npm install)
+
+# Build the package
+RUN echo "Building the package..." && \
+    (bun run build || npm run build)
+
+# Create a basic test script
+RUN printf 'import { Flutterwave } from "./dist/index.mjs";\n\ntry {\n  console.log("Testing Flutterwave SDK in Bun runtime...");\n  const flw = new Flutterwave({ secretKey: "test" });\n\n  // Test basic functionality\n  console.log("Testing SDK initialization:", !!flw);\n  if (!flw) throw new Error("SDK failed to initialize");\n\n  // Test that key methods exist\n  console.log("Checking core methods...");\n  const requiredMethods = ["banks", "payments", "otp", "charges"];\n  for (const method of requiredMethods) {\n    if (typeof flw[method] !== "object") {\n      throw new Error(`Property ${method} is missing or not an object`);\n    }\n  }\n\n  console.log("✅ All tests passed! Package works in Bun runtime.");\n} catch (error) {\n  console.error("❌ Test failed:", error);\n  process.exit(1);\n}\n' > bun_test.js
+
+# Run the test
+CMD ["bun", "run", "bun_test.js"]
+

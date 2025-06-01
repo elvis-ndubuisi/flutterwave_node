@@ -1,0 +1,47 @@
+FROM denoland/deno:latest
+
+WORKDIR /app
+
+# Install build dependencies with better error handling
+RUN apt-get update && \
+    apt-get install -y curl ca-certificates gnupg build-essential && \
+    # Setup Node.js repository - using official method instead of 'n'
+    echo "Setting up Node.js repository..." && \
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    # Update again with new repository
+    apt-get update && \
+    # Install Node.js
+    apt-get install -y nodejs && \
+    # Verify Node.js installation
+    node --version && \
+    # Install pnpm
+    echo "Installing pnpm..." && \
+    npm install -g pnpm && \
+    # Clean up
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy source code, excluding node_modules (via .dockerignore)
+COPY . .
+
+# Build the package
+RUN echo "Building package..." && \
+    # Create a pre-built package for Deno testing
+    printf "import { Flutterwave } from './dist/index.mjs';\nexport default Flutterwave;\n" > test_wrapper.js && \
+    # Install dependencies and build
+    npm install && \
+    npm run build && \
+    echo "Build completed successfully."
+
+# Create a Deno test script that imports and tests the package
+RUN printf 'import { Flutterwave } from "./dist/index.mjs";\n\ntry {\n  console.log("Testing Flutterwave SDK in Deno runtime...");\n  \n  // Initialize the SDK\n  const flw = new Flutterwave({ secretKey: "test" });\n  \n  // Test basic functionality\n  console.log("Testing SDK initialization:", !!flw);\n  if (!flw) throw new Error("SDK failed to initialize");\n  \n  // Test that key properties exist\n  console.log("Checking core properties...");\n  const requiredProps = ["banks", "payments", "otp", "charges"];\n  for (const prop of requiredProps) {\n    if (typeof flw[prop] !== "object") {\n      throw new Error(`Property ${prop} is missing or not an object`);\n    }\n  }\n  \n  // Test ping method\n  console.log("Testing ping method...");\n  const pingResult = await flw.ping();\n  console.log("Ping result:", pingResult);\n  \n  console.log("✅ All tests passed! Package works in Deno runtime.");\n} catch (error) {\n  console.error("❌ Test failed:", error);\n  Deno.exit(1);\n}\n' > deno_test.js
+
+# Create a simple shell script to run the test with proper error handling
+RUN printf '#!/bin/sh\nset -e\necho "Starting Deno test..."\n\necho "Running test with Deno runtime..."\ndeno run --allow-net --allow-read deno_test.js\n\nSTATUS=$?\nif [ $STATUS -eq 0 ]; then\n  echo "✅ Deno test completed successfully"\nelse\n  echo "❌ Deno test failed with status: $STATUS"\n  exit $STATUS\nfi\n' > run_test.sh && \
+    chmod +x run_test.sh
+
+# Run the test script
+CMD ["./run_test.sh"]
+
