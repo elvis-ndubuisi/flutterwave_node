@@ -39,8 +39,9 @@ import type {
 	ChargeUSSDResponse,
 	ChargeUgandaMobileMobilePayload,
 	ChargeUgandaMobileResponse,
+	ValidateChargePayload,
+	ValidateChargeResponse,
 } from "@/definitions/charges";
-import { w } from "vitest/dist/chunks/reporters.d.C-cu31ET.js";
 
 type T = Record<string, unknown>;
 
@@ -259,5 +260,14 @@ export class ChargeService {
 	 */
 	async fawryPay(payload: ChargeFawryPayPayload): Promise<ChargeFawryResponse> {
 		return this.client.post("charges?type=fawry_pay", payload as unknown as T);
+	}
+
+	/**
+	 * Validate a pending transaction using an OTP (Card or account charges)
+	 */
+	async validate(
+		payload: ValidateChargePayload,
+	): Promise<ValidateChargeResponse> {
+		return this.client.post("validate-charge", payload as unknown as T);
 	}
 }
