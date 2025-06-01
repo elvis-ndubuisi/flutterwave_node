@@ -4,6 +4,8 @@ import { BanksService } from "./services/banks";
 import { ChargeService } from "./services/charge";
 import { OTPServices } from "./services/otp";
 import { PaymentService } from "./services/payments";
+import { TransferService } from "./services/transfer";
+import { TransferBeneficiaryService } from "./services/transfer-beneficiary";
 
 export class Flutterwave {
 	private apiClient: ApiClient;
@@ -12,6 +14,8 @@ export class Flutterwave {
 	public payments: PaymentService;
 	public otp: OTPServices;
 	public charges: ChargeService;
+	public transfer: TransferService;
+	public beneficiary: TransferBeneficiaryService;
 
 	constructor(config: FlutterwaveConfig) {
 		if (!config || !config.secretKey) {
@@ -25,6 +29,8 @@ export class Flutterwave {
 		this.payments = new PaymentService(this.apiClient);
 		this.otp = new OTPServices(this.apiClient);
 		this.charges = new ChargeService(this.apiClient);
+		this.transfer = new TransferService(this.apiClient);
+		this.beneficiary = new TransferBeneficiaryService(this.apiClient);
 	}
 
 	async ping(): Promise<{ status: string; message: string }> {
@@ -53,5 +59,7 @@ export * from "./definitions/payments";
 export * from "./definitions/opt";
 export * from "./errors/flutterwave-error";
 export * from "./definitions/charges";
+export * from "./definitions/transfer-beneficiary";
+export * from "./definitions/transfer";
 // Exorts flutter as default or named (for CJS/ESM compatibility if needed)
 export default Flutterwave;
