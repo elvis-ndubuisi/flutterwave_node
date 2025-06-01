@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/elvis-ndubuisi/flutterwave_node/compare/v1.3.0...v1.3.1) (2025-06-01)
+
+
+### Bug Fixes
+
+* add validate charge to charge service ([a57d71a](https://github.com/elvis-ndubuisi/flutterwave_node/commit/a57d71ab6ef46b46fd43d6be881b5d2972f7e578))
+
 # [1.3.0](https://github.com/elvis-ndubuisi/flutterwave_node/compare/v1.2.0...v1.3.0) (2025-05-28)
 
 
