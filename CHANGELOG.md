@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/elvis-ndubuisi/flutterwave_node/compare/v1.3.1...v1.4.0) (2025-06-02)
+
+
+### Features
+
+* virtual accounts service ([53541d7](https://github.com/elvis-ndubuisi/flutterwave_node/commit/53541d77773cb600997b7efc9af5b3867aaf3590))
+
 ## [1.3.1](https://github.com/elvis-ndubuisi/flutterwave_node/compare/v1.3.0...v1.3.1) (2025-06-01)
 
 
